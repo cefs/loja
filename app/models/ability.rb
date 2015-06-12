@@ -11,6 +11,8 @@ class Ability
         can :read, Book      
     elsif user.role? :funcionario
         can :read, Book
+    else
+        can :read, Book
     end
   end
 end
