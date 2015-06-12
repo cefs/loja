@@ -14,14 +14,22 @@
       <tr>
         <td><%= book.name %></td>
         <td><%= book.description %></td>
-        <td><%= link_to 'Show', book, class: "btn btn-default" %></td>
-        <td><%= link_to 'Edit', edit_book_path(book), class: "btn btn-default" %></td>
-        <td><%= link_to 'Destroy', book, class: "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if can? :show, book %>
+          <td><%= link_to 'Show', book, class: "btn btn-default" %></td>
+        <% end %>
+        <% if can? :edit, book %>
+          <td><%= link_to 'Edit', edit_book_path(book), class: "btn btn-default" %></td>
+        <% end %>          
+        <% if can? :destroy, book %>
+          <td><%= link_to 'Destroy', book, class: "btn btn-default", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>          
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<% if can? :new, @book %>
+  <%= link_to 'New Book', new_book_path %>
+<% end %>
 
-<%= link_to 'New Book', new_book_path %>
