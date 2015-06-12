@@ -6,11 +6,9 @@ class Ability
     if user.role? :admin 
         can :manage, :all        
     elsif user.role? :gerente
-        can :read, Book
+        can [:read, :create, :update], :all
     elsif user.role? :funcionario
-        can :read, Book      
-    elsif user.role? :funcionario
-        can :read, Book
+        can [:new, :read], Book
     else
         can :read, Book
     end
